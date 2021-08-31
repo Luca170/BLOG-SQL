@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="/home.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+</head>
+<body>
+    <div class="add">
+    <h2>Write a post here: </h2> <br>
+
+    <form class="add-form" action="/post" method="POST">
+        <label class="label" for="title">Title: </label><br>
+        <input class="input" type="text" autocomplete="off" name="title" id="title"><br>
+        <label class="label" for="content">Content: </label><br>
+        <textarea name="content" id="input" cols="40" rows="7"></textarea> <br>
+        <label class="label" for="author">Author: </label> <br>
+        <input class="input" type="text" name="author" id="author" autocomplete="off"> <br>
+        <button class="button" type="submit">Save</button>
+    </form>
+    </div>
+    <hr>
+    <div>
+        <% posts.forEach(post => { %>
+            <div class="post">
+                <h2><%= post.title %></h2>
+                <h4 style="color:white"><%= post.author %></h4>
+                <p style="color:white"><%= post.content %></p>
+                <form action="/delete" method="POST">
+                <input type="hidden" name = "id" value="<%= post.id %>">
+                <button class="button" type="submit">Delete</button>
+                </form>
+                <form action="/edit" method="GET">
+                <input type="hidden" name = "id" value="<%= post.id %>">
+                <button class="button" type="submit">Edit</button>
+                </form>
+        <% }) %> 
+        </div>
+</body>
+</html>
